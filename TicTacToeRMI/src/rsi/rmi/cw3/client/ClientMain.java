@@ -1,10 +1,12 @@
 package rsi.rmi.cw3.client;
 
+import jdk.nashorn.internal.runtime.regexp.joni.exception.ValueException;
 import rsi.rmi.cw3.shared.ITTTService;
 import rsi.rmi.cw3.ssl.sockets.RMISSLClientSocketFactory;
 
 import java.net.InetAddress;
 import java.rmi.Naming;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Scanner;
@@ -32,10 +34,26 @@ public class ClientMain {
 
             while (true) {
                 String coordinates = scanner.nextLine();
-                itttService.move(coordinates.charAt(0) - 48, coordinates.charAt(2) - 48, tttClient.getSymbol());
+                try {
+                    if(coordinates.length()!=3) {
+                        throw new ValueException("Bad input!");
+                    }
+                    itttService.move(coordinates.charAt(0) - 48, coordinates.charAt(2) - 48, tttClient.getSymbol());
+                }
+                catch (RemoteException e){
+                    throw e.getCause();
+                }
+                catch (ValueException e){
+                    System.out.println(e.getMessage());
+                    System.out.print("Insert coordinates(x,y):");
+                }
+                catch (Exception e){
+                    System.out.println(e.getMessage());
+                }
+
             }
 
-        } catch (Exception e) {
+        } catch (Throwable e) {
             e.printStackTrace();
         }
     }
