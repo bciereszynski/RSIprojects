@@ -2,6 +2,8 @@ package rsi.rmi.cw3.server;
 
 import rsi.rmi.cw3.shared.IFTTTClient;
 import rsi.rmi.cw3.shared.ITTTService;
+import rsi.rmi.cw3.shared.RMISSLServerSocketFactory;
+import rsi.rmi.cw3.ssl.sockets.RMISSLClientSocketFactory;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -9,11 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TTTService extends UnicastRemoteObject implements ITTTService {
+    private static final int PORT = 2019;
     private final List<IFTTTClient> clients = new ArrayList<>();
     private final char[][] board = new char[3][3];
     private char currentSymbol = 'O';
 
-    public TTTService() throws RemoteException {
+    public TTTService() throws Exception {
+        super(PORT,
+                new RMISSLClientSocketFactory(),
+                new RMISSLServerSocketFactory());
         for (int i = 0; i <= 2; i++) {
             for (int j = 0; j <= 2; j++) {
                 board[i][j] = '-';
