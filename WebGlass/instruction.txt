@@ -1,0 +1,5 @@
+1. Download GlassFish plugin to InteliJ and download GlassFish 4.1.0 https://download.oracle.com/glassfish/4.1
+2. Create new project (Jakarta EE -> Web Application -> Version Java EE 8)
+3. Delete java files and html
+4. Edit packages in Pom.xml
+5. Run configuration - it will require entering path to GlassFish
