@@ -3,3 +3,6 @@
 3. Delete java files and html
 4. Edit packages in Pom.xml
 5. Run configuration - it will require entering path to GlassFish
+
+INFO
+if u have problem with JDK version make sure that cmd command "java -version" returns java 8 *to verify*
