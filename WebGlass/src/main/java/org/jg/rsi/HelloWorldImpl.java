@@ -4,7 +4,8 @@ import javax.jws.WebService;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebService(endpointInterface = "org.jg.rsi.HelloWorld")
+@WebService(endpointInterface = "org.jg.rsi.HelloWorld", name="HelloWorldName", portName = "HelloWorldPortName",
+        serviceName = "HelloWorldImplService", targetNamespace = "http://rsi.jg.org/")
 public class HelloWorldImpl implements HelloWorld {
     @Override
     public String getHelloWorldAsString(String name) {

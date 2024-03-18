@@ -11,8 +11,10 @@ import java.util.List;
 @SOAPBinding(style = Style.DOCUMENT, use = Use.LITERAL) //optional
 public interface HelloWorld {
     @WebMethod
+    //@WebMethod(operationName = "getName")
     String getHelloWorldAsString(String name);
 
+    //@WebMethod(action = "POST")
     @WebMethod
     public List<Product> getProducts();
 }
