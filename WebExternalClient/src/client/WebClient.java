@@ -6,6 +6,7 @@ import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Scanner;
 
 public class WebClient {
     public static void main(String[] args) throws MalformedURLException {
@@ -16,8 +17,11 @@ public class WebClient {
         Service service = Service.create(url, qname);
         GeoIPServiceSoap geo = service.getPort(GeoIPServiceSoap.class);
 
-        String response = geo.getLocation();
+        System.out.println("Podaj ip:");
+        Scanner scanner = new Scanner(System.in);
+        String ip = scanner.nextLine();
+        String response = geo.getIpLocation(ip);
 
-        System.out.println("Klient otrzymał: " + response);
+        System.out.println("Odpowiedź: " + response);
     }
 }
